@@ -1,0 +1,472 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --fundo: #09080f;
+    --fundo-secundario: #211a2d;
+    --roxo: #39234f;
+    --roxo-claro: #a84ce0;
+    --lilas: #bd65ed;
+    --texto: #f8f5fc;
+    --texto-secundario: #bdb4c8;
+    --borda: #59336f;
+    --card: #2b2338;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--fundo);
+    color: var(--texto);
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.page {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button,
+input,
+textarea {
+    font: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    margin: 0;
+}
+
+.header {
+    min-height: 68px;
+    padding: 20px 9%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    background: var(--roxo);
+}
+
+.marca {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.marca::before {
+    content: "";
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid var(--lilas);
+    border-radius: 50%;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.nav a {
+    font-size: 10px;
+    color: #e5dbea;
+    transition: color 0.3s ease;
+}
+
+.nav a:hover {
+    color: var(--lilas);
+}
+
+.button {
+    display: inline-block;
+    border: 1px solid var(--lilas);
+    border-radius: 4px;
+    padding: 11px 20px;
+    background: var(--roxo-claro);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.button:hover {
+    background: #9137c8;
+    box-shadow: 0 0 20px #a84ce044;
+}
+
+.hero {
+    min-height: 360px;
+    padding: 65px 20px 75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: var(--roxo);
+}
+
+.hero-retangulo {
+    width: 100%;
+    max-width: 700px;
+}
+
+.hero h1 {
+    color: #fff;
+    font-size: clamp(30px, 4vw, 46px);
+    font-weight: 800;
+    line-height: 1.12;
+    letter-spacing: -1.2px;
+    margin-bottom: 22px;
+}
+
+.hero-texto {
+    max-width: 520px;
+    margin: 0 auto 25px;
+    color: #ded2e8;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.servicos-header,
+.sobrenos-header,
+.depoimentos-header,
+.contato-header {
+    text-align: center;
+}
+
+.servicos-header h5,
+.sobrenos-header h5,
+.depoimentos-header h5,
+.contato-header h5 {
+    margin-bottom: 5px;
+    color: var(--lilas);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.servicos-header h2,
+.sobrenos-header h2,
+.depoimentos-header h2,
+.contato-header h2 {
+    font-size: 27px;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.5px;
+}
+
+.servicos {
+    padding: 65px 9% 75px;
+    background: var(--fundo);
+}
+
+.servicos-header {
+    max-width: 650px;
+    margin: 0 auto 35px;
+}
+
+.servicos-header p {
+    margin-top: 15px;
+    color: var(--texto-secundario);
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+.servicos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.grid-box {
+    min-height: 150px;
+    padding: 25px 22px;
+    background: var(--card);
+    border: 1px solid #382b49;
+    border-radius: 10px;
+}
+
+.grid-box h3 {
+    margin-bottom: 12px;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.grid-box p {
+    color: var(--texto-secundario);
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+.sobrenos {
+    position: relative;
+    padding: 65px 9% 75px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 50px;
+    align-items: center;
+    background: var(--fundo-secundario);
+}
+
+.sobrenos-header {
+    grid-column: 1 / -1;
+    margin-bottom: 35px;
+}
+
+.sobrenos-texto {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.sobrenos-texto h3 {
+    margin-bottom: 18px;
+    color: var(--lilas);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.6;
+}
+
+.sobrenos-texto p {
+    margin-bottom: 16px;
+    color: var(--texto-secundario);
+    font-size: 11px;
+    line-height: 1.9;
+}
+
+.depoimentos {
+    padding: 65px 9% 75px;
+    background: var(--fundo);
+}
+
+.depoimentos-header {
+    margin-bottom: 35px;
+}
+
+.depoimentos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.depoimentos-box {
+    min-height: 155px;
+    padding: 30px 22px 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: var(--card);
+    border: 1px solid #382b49;
+    border-radius: 10px;
+}
+
+.depoimentos-box p {
+    margin-top: 20px;
+    color: #d9d0e2;
+    font-size: 10px;
+    line-height: 1.8;
+}
+
+.depoimentos-box h6 {
+    margin-top: 15px;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.contato {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 35px;
+    row-gap: 25px;
+    align-items: center;
+}
+
+.contato-header {
+    grid-column: 1 / -1;
+    grid-row: 1;
+}
+
+.contato-imagem {
+    grid-column: 1;
+    grid-row: 2;
+    width: 100%;
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 12px;
+    background: var(--roxo);
+    border: 1px solid var(--borda);
+}
+
+.contato-imagem img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+}
+
+.contato-formulario {
+    grid-column: 2;
+    grid-row: 2;
+    width: 100%;
+    max-width: 570px;
+    margin-left: 0;
+}
+
+.contato-formulario h3 {
+    margin-bottom: 8px;
+    color: var(--lilas);
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.contato-formulario p {
+    margin-bottom: 18px;
+    color: var(--texto-secundario);
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.contato-formulario label {
+    margin: 10px 0 5px;
+    color: #e9dff0;
+    font-size: 10px;
+    font-weight: 500;
+}
+
+.contato-formulario input,
+.contato-formulario textarea {
+    width: 100%;
+    padding: 10px 12px;
+    color: #fff;
+    background: #100c17;
+    border: 1px solid #694080;
+    border-radius: 4px;
+    outline: none;
+}
+
+.contato-formulario input {
+    min-height: 36px;
+}
+
+.contato-formulario textarea {
+    min-height: 75px;
+    resize: vertical;
+}
+
+.contato-formulario input:focus,
+.contato-formulario textarea:focus {
+    border-color: var(--lilas);
+    box-shadow: 0 0 0 2px #bd65ed22;
+}
+
+.contato-formulario .button {
+    align-self: flex-start;
+    margin-top: 18px;
+}
+
+.footer {
+    padding: 45px 9% 20px;
+    background: #120e19;
+    border-top: 1px solid #24182f;
+}
+
+.marca-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 35px;
+}
+
+.marca-footer::before {
+    content: "";
+    width: 24px;
+    height: 24px;
+    margin-bottom: 10px;
+    border: 1.5px solid var(--lilas);
+    border-radius: 50%;
+}
+
+.marca-footer h4 {
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 30px;
+    margin-bottom: 35px;
+}
+
+.footer-grid > div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.footer-grid h5 {
+    margin-bottom: 12px;
+    color: var(--lilas);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.footer-grid a {
+    margin-bottom: 7px;
+    color: var(--texto-secundario);
+    font-size: 10px;
+}
+
+.copyright {
+    padding-top: 18px;
+    border-top: 1px solid #30223b;
+    color: #8d8299;
+    font-size: 9px;
+    text-align: center;
+}
+
+
+.sobrenos-imagem,
+.contato-imagem {
+    height: auto;
+    overflow: hidden;
+}
+
+.sobrenos-imagem img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: inherit;
+}

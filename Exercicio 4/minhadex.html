@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MinhaDex — Sua jornada Pokémon</title>
+<style>
+:root{--red:#e53935;--red-dark:#b71c1c;--ink:#292d32;--muted:#68717b;--paper:#f4f5f6;--white:#fff;--line:#e1e4e8;--shadow:0 14px 36px #20273312}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:88px}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}
+.nav{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:17px clamp(20px,6vw,88px);background:#fff;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:1.45rem;letter-spacing:-.06em}
+.brand-mark{width:30px;height:30px;border:3px solid var(--ink);border-radius:50%;background:linear-gradient(to bottom,var(--red) 0 46%,var(--ink) 46% 55%,#fff 55%);position:relative;display:inline-block}
+.brand-mark:after{content:"";position:absolute;width:8px;height:8px;border:3px solid var(--ink);background:#fff;border-radius:50%;left:7px;top:7px}
+.nav-links{display:flex;gap:clamp(16px,3vw,38px);font-size:.92rem;font-weight:750;color:#555d66}
+.nav-links a:hover{color:var(--red)}
+.hero{position:relative;overflow:hidden;padding:clamp(64px,10vw,126px) clamp(22px,8vw,120px);background:linear-gradient(115deg,#d9272e 0%,#ed4742 58%,#f15d58 100%);color:#fff}
+.hero:before,.hero:after{content:"";position:absolute;border:26px solid #ffffff13;border-radius:50%;pointer-events:none}
+.hero:before{width:360px;height:360px;right:-80px;top:-150px}
+.hero:after{width:220px;height:220px;right:15%;bottom:-170px}
+.hero-inner{max-width:1100px;margin:auto;position:relative;z-index:1}
+.eyebrow{font-size:.76rem;font-weight:900;text-transform:uppercase;letter-spacing:.18em;opacity:.85}
+h1{font-size:clamp(2.8rem,7vw,5.9rem);line-height:.98;letter-spacing:-.075em;max-width:760px;margin:18px 0}
+.hero p{font-size:clamp(1rem,2vw,1.2rem);max-width:570px;line-height:1.7;color:#fff0f0}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:999px;padding:13px 20px;font-weight:850;cursor:pointer;transition:transform .18s,background .18s}
+.btn:hover{transform:translateY(-2px)}
+.btn-light{background:#fff;color:var(--red-dark)}
+.btn-outline{border:1px solid #ffffff80;color:#fff;background:#ffffff12}
+main{max-width:1160px;margin:auto;padding:0 24px}
+.section{padding:76px 0}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:28px}
+.kicker{color:var(--red);font-size:.75rem;text-transform:uppercase;letter-spacing:.17em;font-weight:900}
+h2{font-size:clamp(2rem,4vw,3.1rem);letter-spacing:-.06em;margin:8px 0 0}
+.section-head p{max-width:440px;color:var(--muted);line-height:1.6;margin:0}
+.regions{display:grid;gap:12px}
+details.region{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 3px 12px #252b3306}
+.region summary{list-style:none;cursor:pointer;padding:20px 22px;display:flex;align-items:center;justify-content:space-between;gap:15px;font-weight:900;font-size:1.06rem}
+.region summary::-webkit-details-marker{display:none}
+.region summary:after{content:"+";display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#fce9e9;color:var(--red);font-size:1.25rem}
+.region[open] summary{color:var(--red);border-bottom:1px solid var(--line)}
+.region[open] summary:after{content:"−"}
+.region-content{padding:18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.info-card{background:#f7f8f9;border-radius:13px;padding:16px;min-height:124px}
+.info-card .label{font-size:.7rem;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.08em}
+.info-card p{margin:10px 0 0;font-weight:750;line-height:1.5}
+.starter-names{color:var(--red-dark)}
+.dex-section{background:#292d32;color:#fff;border-radius:28px;padding:clamp(24px,5vw,54px);overflow:hidden}
+.dex-section .kicker{color:#ff7773}
+.dex-section .section-head p{color:#c5c9ce}
+.carousel-wrap{display:grid;grid-template-columns:48px minmax(0,1fr) 48px;align-items:center;gap:12px;margin-top:26px}
+.arrow{width:46px;height:46px;border:1px solid #ffffff30;background:#ffffff12;color:#fff;border-radius:50%;font-size:1.4rem;cursor:pointer;display:grid;place-items:center}
+.arrow:hover{background:var(--red)}
+.dex-track{display:flex;gap:16px;overflow-x:auto;scroll-behavior:smooth;padding:8px 2px 18px;scrollbar-width:none}
+.dex-track::-webkit-scrollbar{display:none}
+.dex-card{flex:0 0 calc((100% - 64px) / 5);min-width:145px;scroll-snap-align:start;text-align:center}
+.orb{aspect-ratio:1;border-radius:50%;background:linear-gradient(to bottom,#e94440 0 47%,#292d32 47% 53%,#fff 53%);padding:10px;display:grid;place-items:center;box-shadow:inset 0 0 0 7px #ffffff20,0 12px 24px #0003}
+.orb-inner{width:100%;height:100%;border-radius:50%;border:2px solid #2e3237;background:#f8f9fa;display:grid;place-items:center;overflow:hidden}
+.orb img{width:78%;height:78%;object-fit:contain;image-rendering:pixelated}
+.dex-name{font-weight:900;margin:12px 0 4px;font-size:0.95rem}
+.dex-type{font-size:.72rem;font-weight:700;color:#a0aec0;margin-bottom:6px;text-transform:capitalize}
+.dex-meta{font-size:.8rem;color:#c8cdd2;line-height:1.6}
+.dex-number{color:#ff8580;font-weight:900}
+.team-panel{background:#fff;border:1px solid var(--line);border-radius:24px;padding:clamp(22px,4vw,38px);box-shadow:var(--shadow)}
+.team-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.team-slot{position:relative;min-height:185px;border:2px dashed #d7dbe0;border-radius:20px;background:#fafbfc;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;color:#8a929b;text-align:center;cursor:pointer;padding:16px;transition:border-color .2s,background .2s}
+.team-slot:hover{border-color:var(--red);background:#fff8f8}
+.team-slot .team-sprite{width:104px;height:104px;object-fit:contain;image-rendering:pixelated}
+.team-slot .slot-name{font-weight:900;color:var(--ink)}
+.team-slot .slot-number{font-size:.78rem;color:var(--muted)}
+.team-slot .remove-pokemon{position:absolute;right:9px;top:9px;width:29px;height:29px;border:0;border-radius:50%;background:var(--red);color:white;font-size:1.2rem;line-height:1;cursor:pointer;display:grid;place-items:center}
+.team-slot .remove-pokemon:hover{background:var(--red-dark)}
+.team-slot .plus{font-size:2.4rem;line-height:1;color:var(--red);font-weight:400}
+.team-slot .slot-label{font-size:.8rem;font-weight:800}
+.team-hint{font-size:.86rem;color:var(--muted);line-height:1.6;margin:0}
+.team-footer{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:20px}
+.clear-btn{background:var(--red);color:#fff;white-space:nowrap}
+.clear-btn:hover{background:var(--red-dark)}
+.modal-backdrop{position:fixed;inset:0;background:#14171ccc;z-index:30;display:flex;align-items:center;justify-content:center;padding:18px}
+.modal-backdrop[hidden]{display:none!important}
+.modal{width:min(1000px,100%);max-height:90vh;overflow:auto;background:#fff;border-radius:22px;padding:24px;box-shadow:0 24px 80px #0005}
+.modal-head{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.modal-head h3{margin:5px 0 0;font-size:1.5rem;letter-spacing:-.04em}
+.close-modal{display:grid;place-items:center;width:42px;height:42px;border:0;border-radius:50%;background:#f0f1f3;font-size:1.6rem;cursor:pointer;color:var(--ink)}
+.search{width:100%;margin:18px 0 12px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;outline:none}
+.search:focus{border-color:var(--red);box-shadow:0 0 0 3px #e539351a}
+.pokemon-list{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:8px}
+.pokemon-choice{position:relative;background:#f6f7f8;border:1px solid #eceef0;border-radius:12px;padding:8px 4px 10px;text-align:center;min-width:0;cursor:pointer;transition:transform .15s,border-color .15s,background .15s;color:var(--ink)}
+.pokemon-choice:hover{transform:translateY(-2px);border-color:var(--red);background:#fff5f5}
+.pokemon-choice img{display:block;width:100%;max-width:76px;aspect-ratio:1;object-fit:contain;margin:auto;image-rendering:pixelated}
+.pokemon-choice span{display:block;font-size:.7rem;font-weight:800;overflow-wrap:anywhere}
+.pokemon-choice small{display:block;font-size:.63rem;color:var(--muted);margin-top:3px}
+.picker-status{font-size:.9rem;color:var(--muted);padding:4px 0 12px}
+.picker-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px;color:var(--muted);font-size:.85rem}
+footer{margin-top:40px;background:#25292e;color:#c9cdd1;padding:28px 24px;text-align:center;font-size:.85rem}
+footer strong{color:#fff}
+@media(max-width:900px){.region-content{grid-template-columns:repeat(2,minmax(0,1fr))}.dex-card{flex-basis:calc((100% - 32px)/3)}.pokemon-list{grid-template-columns:repeat(5,minmax(0,1fr))}}
+@media(max-width:600px){.nav{padding:14px 18px;align-items:flex-start;gap:14px}.brand{font-size:1.2rem}.nav-links{gap:10px;flex-wrap:wrap;justify-content:flex-end;font-size:.78rem}.hero{padding:66px 23px}.section{padding:54px 0}.section-head{display:block}.section-head p{margin-top:12px}.region-content{grid-template-columns:1fr 1fr;padding:12px}.info-card{padding:12px;min-height:110px}.carousel-wrap{grid-template-columns:34px minmax(0,1fr) 34px;gap:7px}.arrow{width:34px;height:34px}.dex-card{flex-basis:70%}.team-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.team-slot{min-height:145px}.pokemon-list{grid-template-columns:repeat(3,minmax(0,1fr))}.modal{padding:17px}.team-footer{flex-direction:column;align-items:flex-start}.clear-btn{width:100%}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a class="brand" href="#inicio"><span class="brand-mark" aria-hidden="true"></span>MinhaDex</a>
+  <div class="nav-links">
+    <a href="#regioes">Regiões</a>
+    <a href="#pokedex">Pokédex</a>
+    <a href="#meu-time">Meu time</a>
+  </div>
+</nav>
+<header class="hero" id="inicio">
+  <div class="hero-inner">
+    <div class="eyebrow">Sua jornada começa aqui</div>
+    <h1>Todos os Pokémon.<br>Sua própria história.</h1>
+    <p>Explore regiões, descubra Pokémon e monte o time perfeito para a sua próxima aventura.</p>
+    <div class="hero-actions">
+      <a class="btn btn-light" href="#pokedex">Explorar Pokédex <span aria-hidden="true">↗</span></a>
+      <a class="btn btn-outline" href="#meu-time">Montar meu time</a>
+    </div>
+  </div>
+</header>
+<main>
+  <section class="section" id="regioes">
+    <div class="section-head">
+      <div><div class="kicker">O mundo Pokémon</div><h2>Explore as regiões</h2></div>
+      <p>Abra uma região para conhecer seus iniciais, o tamanho da Pokédex, seus professores e as organizações que cruzam o caminho dos treinadores.</p>
+    </div>
+    <div class="regions">
+      <details class="region"><summary>Kanto</summary><div class="region-content">
+        <article class="info-card"><div class="label">Pokémon iniciais</div><p class="starter-names">Bulbasaur · Charmander · Squirtle</p></article>
+        <article class="info-card"><div class="label">Pokédex regional</div><p>151 Pokémon</p></article>
+        <article class="info-card"><div class="label">Professor</div><p>Professor Samuel Carvalho</p></article>
+        <article class="info-card"><div class="label">Organização maligna</div><p>Equipe Rocket</p></article>
+      </div></details>
+      <details class="region"><summary>Johto</summary><div class="region-content">
+        <article class="info-card"><div class="label">Pokémon iniciais</div><p class="starter-names">Chikorita · Cyndaquil · Totodile</p></article>
+        <article class="info-card"><div class="label">Pokédex regional</div><p>100 Pokémon</p></article>
+        <article class="info-card"><div class="label">Professor</div><p>Professor Elm</p></article>
+        <article class="info-card"><div class="label">Organização maligna</div><p>Equipe Rocket</p></article>
+      </div></details>
+      <details class="region"><summary>Hoenn</summary><div class="region-content">
+        <article class="info-card"><div class="label">Pokémon iniciais</div><p class="starter-names">Treecko · Torchic · Mudkip</p></article>
+        <article class="info-card"><div class="label">Pokédex regional</div><p>135 Pokémon</p></article>
+        <article class="info-card"><div class="label">Professor</div><p>Professor Birch</p></article>
+        <article class="info-card"><div class="label">Organizações malignas</div><p>Equipe Aqua · Equipe Magma</p></article>
+      </div></details>
+      <details class="region"><summary>Sinnoh</summary><div class="region-content">
+        <article class="info-card"><div class="label">Pokémon iniciais</div><p class="starter-names">Turtwig · Chimchar · Piplup</p></article>
+        <article class="info-card"><div class="label">Pokédex regional</div><p>107 Pokémon</p></article>
+        <article class="info-card"><div class="label">Professor</div><p>Professor Rowan</p></article>
+        <article class="info-card"><div class="label">Organização maligna</div><p>Equipe Galáctica</p></article>
+      </div></details>
+      <details class="region"><summary>Unova</summary><div class="region-content">
+        <article class="info-card"><div class="label">Pokémon iniciais</div><p class="starter-names">Snivy · Tepig · Oshawott</p></article>
+        <article class="info-card"><div class="label">Pokédex regional</div><p>156 Pokémon</p></article>
+        <article class="info-card"><div class="label">Professora</div><p>Professora Juniper</p></article>
+        <article class="info-card"><div class="label">Organização maligna</div><p>Equipe Plasma</p></article>
+      </div></details>
+      <details class="region"><summary>Kalos</summary><div class="region-content">
+        <article class="info-card"><div class="label">Pokémon iniciais</div><p class="starter-names">Chespin · Fennekin · Froakie</p></article>
+        <article class="info-card"><div class="label">Pokédex regional</div><p>72 Pokémon</p></article>
+        <article class="info-card"><div class="label">Professor</div><p>Professor Sicômoro</p></article>
+        <article class="info-card"><div class="label">Organização maligna</div><p>Equipe Flare</p></article>
+      </div></details>
+      <details class="region"><summary>Alola</summary><div class="region-content">
+        <article class="info-card"><div class="label">Pokémon iniciais</div><p class="starter-names">Rowlet · Litten · Popplio</p></article>
+        <article class="info-card"><div class="label">Pokédex regional</div><p>86 Pokémon</p></article>
+        <article class="info-card"><div class="label">Professor</div><p>Professor Kukui</p></article>
+        <article class="info-card"><div class="label">Organizações malignas</div><p>Fundação Aether · Equipe Skull</p></article>
+      </div></details>
+      <details class="region"><summary>Galar</summary><div class="region-content">
+        <article class="info-card"><div class="label">Pokémon iniciais</div><p class="starter-names">Grookey · Scorbunny · Sobble</p></article>
+        <article class="info-card"><div class="label">Pokédex regional</div><p>89 Pokémon</p></article>
+        <article class="info-card"><div class="label">Professora</div><p>Professora Magnolia</p></article>
+        <article class="info-card"><div class="label">Organizações malignas</div><p>Equipe Yell · Macro Cosmos</p></article>
+      </div></details>
+      <details class="region"><summary>Paldea</summary><div class="region-content">
+        <article class="info-card"><div class="label">Pokémon iniciais</div><p class="starter-names">Sprigatito · Fuecoco · Quaxly</p></article>
+        <article class="info-card"><div class="label">Pokédex regional</div><p>120 Pokémon</p></article>
+        <article class="info-card"><div class="label">Professores</div><p>Professora Sada · Professor Turo</p></article>
+        <article class="info-card"><div class="label">Organização maligna</div><p>Equipe Estrela</p></article>
+      </div></details>
+    </div>
+  </section>
+  <section class="section dex-section" id="pokedex">
+    <div class="section-head">
+      <div><div class="kicker">Conheça seus parceiros</div><h2>Pokédex em destaque</h2></div>
+      <p>Navegue por todos os 1025 Pokémon em blocos de 5 usando as setas.</p>
+    </div>
+    <div class="carousel-wrap">
+      <button class="arrow" id="carousel-prev" aria-label="Voltar 5 Pokémon" type="button">‹</button>
+      <div class="dex-track" id="dex-track" aria-label="Carrossel de Pokémon">
+        <!-- Preenchido dinamicamente via JavaScript -->
+      </div>
+      <button class="arrow" id="carousel-next" aria-label="Avançar 5 Pokémon" type="button">›</button>
+    </div>
+  </section>
+  <section class="section" id="meu-time">
+    <div class="section-head">
+      <div><div class="kicker">Escolha seus parceiros</div><h2>Monte seu time</h2></div>
+      <p>Escolha até seis Pokémon, pesquise pelo nome e personalize sua equipe.</p>
+    </div>
+    <div class="team-panel">
+      <div class="team-grid" id="team-grid" aria-label="Seu time Pokémon"></div>
+      <div class="team-footer">
+        <p class="team-hint">Seu time é salvo automaticamente neste navegador. Você pode remover um Pokémon individualmente pelo ×.</p>
+        <button class="btn clear-btn" id="clear-team" type="button">Limpar time</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="modal-backdrop" id="pokemon-modal" hidden>
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="picker-title">
+      <div class="modal-head">
+        <div><div class="kicker">MinhaDex · Equipe</div><h3 id="picker-title">Escolha um Pokémon</h3></div>
+        <button class="close-modal" id="close-modal" type="button" aria-label="Fechar janela">×</button>
+      </div>
+      <input class="search" id="pokemon-search" type="search" placeholder="Pesquisar por nome ou número..." aria-label="Pesquisar Pokémon">
+      <div class="picker-status" id="picker-status" aria-live="polite">Carregando Pokédex...</div>
+      <div class="pokemon-list" id="pokemon-list"></div>
+      <div class="picker-footer"><span id="result-count"> </span><button class="btn btn-light" id="load-more" type="button" hidden>Carregar mais</button></div>
+    </section>
+  </div>
+</main>
+<footer><strong>MinhaDex</strong> · Feito para treinadores e fãs Pokémon.</footer>
+
+<script>
+(() => {
+  const API = 'https://pokeapi.co/api/v2/pokemon?limit=1025';
+  const SPRITE = id => `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
+  const grid = document.getElementById('team-grid');
+  const modal = document.getElementById('pokemon-modal');
+  const search = document.getElementById('pokemon-search');
+  const list = document.getElementById('pokemon-list');
+  const status = document.getElementById('picker-status');
+  const count = document.getElementById('result-count');
+  const loadMore = document.getElementById('load-more');
+  const closeButton = document.getElementById('close-modal');
+  const clearButton = document.getElementById('clear-team');
+
+  const typeMap = {
+    normal: 'Normal', fire: 'Fogo', water: 'Água', grass: 'Grama',
+    electric: 'Elétrico', ice: 'Gelo', fighting: 'Lutador', poison: 'Veneno',
+    ground: 'Terra', flying: 'Voador', psychic: 'Psíquico', bug: 'Inseto',
+    rock: 'Pedra', ghost: 'Fantasma', dragon: 'Dragão', steel: 'Aço',
+    fairy: 'Fada', dark: 'Sombrio'
+  };
+
+  let pokemon = [];
+  let activeSlot = 0;
+  let visibleCount = 100;
+  let loading = false;
+  let team = Array(6).fill(null);
+
+  try {
+    const saved = JSON.parse(localStorage.getItem('minhadex-team') || 'null');
+    if (Array.isArray(saved) && saved.length === 6) team = saved;
+  } catch (_) {}
+
+  const prettyName = name => name.split('-').map(part => {
+    if (['mr','mime','jr'].includes(part)) return part[0].toUpperCase() + part.slice(1);
+    return part.charAt(0).toUpperCase() + part.slice(1);
+  }).join(' ');
+
+  function saveTeam() {
+    try { localStorage.setItem('minhadex-team', JSON.stringify(team)); } catch (_) {}
+  }
+
+  function renderTeam() {
+    grid.innerHTML = '';
+    team.forEach((entry, index) => {
+      const slot = document.createElement('div');
+      slot.className = 'team-slot';
+      slot.setAttribute('role', 'group');
+      slot.setAttribute('aria-label', entry ? `Espaço ${index + 1}: ${prettyName(entry.name)}` : `Espaço ${index + 1}, adicionar Pokémon`);
+      if (entry) {
+        const remove = document.createElement('button');
+        remove.type = 'button';
+        remove.className = 'remove-pokemon';
+        remove.textContent = '×';
+        remove.setAttribute('aria-label', `Remover ${prettyName(entry.name)}`);
+        remove.addEventListener('click', event => {
+          event.stopPropagation();
+          team[index] = null;
+          saveTeam();
+          renderTeam();
+        });
+        const img = document.createElement('img');
+        img.className = 'team-sprite';
+        img.src = entry.sprite || SPRITE(entry.id);
+        img.alt = prettyName(entry.name);
+        img.loading = 'lazy';
+        const name = document.createElement('span');
+        name.className = 'slot-name';
+        name.textContent = prettyName(entry.name);
+        const number = document.createElement('span');
+        number.className = 'slot-number';
+        number.textContent = `#${String(entry.id).padStart(4, '0')}`;
+        slot.append(remove, img, name, number);
+      } else {
+        const plus = document.createElement('span');
+        plus.className = 'plus';
+        plus.textContent = '+';
+        const label = document.createElement('span');
+        label.className = 'slot-label';
+        label.textContent = 'Adicionar Pokémon';
+        slot.append(plus, label);
+        slot.addEventListener('click', () => openPicker(index));
+        slot.tabIndex = 0;
+        slot.addEventListener('keydown', event => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            openPicker(index);
+          }
+        });
+      }
+      grid.appendChild(slot);
+    });
+  }
+
+  function renderPokemon() {
+    const query = search.value.trim().toLocaleLowerCase('pt-BR');
+    const filtered = pokemon.filter(p => p.name.toLocaleLowerCase('pt-BR').includes(query) || String(p.id) === query.replace(/^#/, ''));
+    const shown = filtered.slice(0, visibleCount);
+    list.innerHTML = '';
+    const fragment = document.createDocumentFragment();
+    shown.forEach(p => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'pokemon-choice';
+      button.innerHTML = `<img loading="lazy" src="${SPRITE(p.id)}" alt=""><span></span><small>#${String(p.id).padStart(4, '0')}</small>`;
+      button.querySelector('span').textContent = prettyName(p.name);
+      button.addEventListener('click', () => {
+        team[activeSlot] = { id: p.id, name: p.name, sprite: SPRITE(p.id) };
+        saveTeam();
+        renderTeam();
+        closePicker();
+      });
+      fragment.appendChild(button);
+    });
+    list.appendChild(fragment);
+    status.textContent = loading ? 'Carregando Pokédex...' : (filtered.length ? `${filtered.length} Pokémon encontrados` : 'Nenhum Pokémon encontrado. Tente outro nome.');
+    count.textContent = filtered.length ? `Exibindo ${shown.length} de ${filtered.length}` : '';
+    loadMore.hidden = shown.length >= filtered.length;
+  }
+
+  const track = document.getElementById('dex-track');
+  
+  async function renderCarousel() {
+    if (!track) return;
+    track.innerHTML = '';
+    const fragment = document.createDocumentFragment();
+    
+    pokemon.forEach(p => {
+      const card = document.createElement('article');
+      card.className = 'dex-card';
+      card.id = `pokemon-${p.id}`;
+      
+      const translatedTypes = p.types ? p.types.map(t => typeMap[t] || t).join(' / ') : 'Carregando...';
+
+      card.innerHTML = `
+        <div class="orb">
+          <div class="orb-inner"><img loading="lazy" src="${SPRITE(p.id)}" alt="Sprite de ${prettyName(p.name)}"></div>
+        </div>
+        <div class="dex-name">${prettyName(p.name)}</div>
+        <div class="dex-type" id="type-${p.id}">${translatedTypes}</div>
+        <div class="dex-meta"><span class="dex-number">#${String(p.id).padStart(4, '0')}</span></div>
+      `;
+      fragment.appendChild(card);
+    });
+    track.appendChild(fragment);
+  }
+
+  async function loadPokemon() {
+    if (pokemon.length || loading) return;
+    loading = true;
+    status.textContent = 'Carregando a Pokédex completa...';
+    try {
+      const response = await fetch(API);
+      if (!response.ok) throw new Error('Falha ao carregar a Pokédex');
+      const data = await response.json();
+      
+      pokemon = data.results.map(item => {
+        const id = Number(item.url.match(/\/pokemon\/(\d+)\/?$/)[1]);
+        return { id, name: item.name, types: null };
+      }).sort((a, b) => a.id - b.id);
+
+      status.textContent = '';
+      renderPokemon();
+      renderCarousel();
+
+      loadAllTypes();
+
+    } catch (error) {
+      status.textContent = 'Não foi possível carregar a Pokédex. Verifique sua conexão e tente novamente.';
+      const retry = document.createElement('button');
+      retry.className = 'btn btn-light';
+      retry.type = 'button';
+      retry.textContent = 'Tentar novamente';
+      retry.addEventListener('click', () => { pokemon = []; loadPokemon(); });
+      list.replaceChildren(retry);
+    } finally {
+      loading = false;
+    }
+  }
+
+  async function loadAllTypes() {
+    const batchSize = 40;
+    for (let i = 0; i < pokemon.length; i += batchSize) {
+      const batch = pokemon.slice(i, i + batchSize);
+      await Promise.all(batch.map(async p => {
+        try {
+          const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${p.id}`);
+          const data = await res.json();
+          p.types = data.types.map(t => t.type.name);
+          const typeEl = document.getElementById(`type-${p.id}`);
+          if (typeEl) {
+            typeEl.textContent = p.types.map(t => typeMap[t] || t).join(' / ');
+          }
+        } catch(e) {}
+      }));
+    }
+  }
+
+  function openPicker(index) {
+    activeSlot = index;
+    visibleCount = 100;
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    search.value = '';
+    search.focus();
+    renderPokemon();
+    loadPokemon();
+  }
+  function closePicker() {
+    modal.hidden = true;
+    document.body.style.overflow = '';
+  }
+
+  search.addEventListener('input', () => {
+    visibleCount = 100;
+    renderPokemon();
+  });
+  loadMore.addEventListener('click', () => {
+    visibleCount += 100;
+    renderPokemon();
+  });
+  closeButton.addEventListener('click', closePicker);
+  modal.addEventListener('click', event => { if (event.target === modal) closePicker(); });
+  document.addEventListener('keydown', event => { if (event.key === 'Escape' && !modal.hidden) closePicker(); });
+  clearButton.addEventListener('click', () => {
+    team = Array(6).fill(null);
+    saveTeam();
+    renderTeam();
+  });
+
+  const prevBtn = document.getElementById('carousel-prev');
+  const nextBtn = document.getElementById('carousel-next');
+
+  if (track && prevBtn && nextBtn) {
+    prevBtn.addEventListener('click', event => {
+      event.preventDefault();
+      const card = track.querySelector('.dex-card');
+      if (card) {
+        const cardWidth = card.getBoundingClientRect().width + 16;
+        const jumpDistance = cardWidth * 5;
+        
+        if (track.scrollLeft <= 5) {
+          track.scrollTo({ left: track.scrollWidth - track.clientWidth, behavior: 'smooth' });
+        } else {
+          track.scrollBy({ left: -jumpDistance, behavior: 'smooth' });
+        }
+      }
+    });
+
+    nextBtn.addEventListener('click', event => {
+      event.preventDefault();
+      const card = track.querySelector('.dex-card');
+      if (card) {
+        const cardWidth = card.getBoundingClientRect().width + 16;
+        const jumpDistance = cardWidth * 5;
+        
+        if (Math.ceil(track.scrollLeft + track.clientWidth) >= track.scrollWidth - 5) {
+          track.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          track.scrollBy({ left: jumpDistance, behavior: 'smooth' });
+        }
+      }
+    });
+  }
+
+  renderTeam();
+  loadPokemon();
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+Faça uma landing page do site MinhaDex sobre Pokémon com o tema de cores de uma pokébola(vermelho, branco e cinza).
+
+No nav eu quero o nome do site na esquerda e na direita eu quero três links um para a seção de regiões, outra para a seção de pokédex e outra para a seção meu time.
+
+Na seção de regiões faça nove accordions com os nomes na seguinte ordem: Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar, Paldea.
+
+Dentro de cada accordion escreva os seguintes cards: Pokémon iniciais, Quantidade de pokemons na pokedex, Professor(es) e Organização maligna(s)
+Kanto: Bulbassaur Charmander Squirtle, 151, Professor Samuel Carvalho, Equipe Rocket
+Johto: Chikorita  Cyndaquil Totodile, 100, Professor Elm, Equipe Rocket
+Hoenn: Treecko Torchic Mudkip, 135, Professor Birch, Equipe Aqua e Equipe Magma
+Sinnoh: Turtwig Chimchar Piplup, 107, Professor Rowan, Equipe Galática
+Unova: Snivy Tepig Oshawott, 156, Professora Juniper, Equipe Plasma
+Kalos: Chespin Fennekin Froakie, 72, Professor Sicômoro, Equipe Flare 
+Alola: Rowlett Litten Popplio, 86, Professor Kukui, Fundação Aether e Equipe Skull
+Galar: Grookey Scorbunny Sobble, 89, Professora Magnolia, Equipe Yell e Macro Cosmos
+Paldea: Sprigatito Fuecoco Quaxly, 120, Professora Sada e Professor Turo, Equipe Estrela
+
+Na seção de pokedex faça um carrossel com cinco esferas que demonstrem o sprite dos pokemons, embaixo da esfera escreva seus nomes, números e tipagem, o carrossel só se move quando os botões são pressionados e movem cinco Pokémons por vez, nas primeiras cinco esferas os pokemons que devem aparecer são os de número 1,2,3,4,5. Esse carrossel deve mostras todos os 1025 pokémons e ser um ciclo permitindo que caso o botão para esquerda seja pressionado os pokemons vão até o número 1 e volte para os últimos pokemons.
+
+Na seção de meu time faça seis esferas com o símbolo + no meio delas quando pressionadas abra um modal que contenha uma barra de pesquisa e aparece todos os pokemons em uma lista mostrando 10 pokemons por linha (sprite e nome embaixo do sprite) e caso não tenha 10 pokemons para a ultima linha faça com a quantidade que tiver disponível. Quando selecionado o pokemon aparece no lugar da esfera que foi utilizada e no canto superior direito um botão com símbolo de "x" para apagar o pokemon dessa esfera.
+No canto inferior direito crie um botão escrito "Limpar time" que apaga todos os pokemons das esferas.
+
+O site deve ser feito utilizando apenas html, css e javascript
+ 

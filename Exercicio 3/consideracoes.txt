@@ -1,0 +1,2 @@
+Bem melhor de fazer se comparado ao bootstrap mas ainda assim meio complicado. Prefiro escrever o css em uma página separada pelo simples fato de deixar o código mais bonito e legível
+Dificuldade: 5/10

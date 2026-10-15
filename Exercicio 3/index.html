@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex3</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600&family=Work+Sans:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #EFE7D6;
+            color: #2A241C;
+            font-family: "Work Sans", sans-serif;
+        }
+        h1, h2, h3 {
+            font-family: "Fraunces", serif;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .verde {
+            background-color: #1B4332;
+        }
+        .texto-verde {
+            color: #1B4332;
+        }
+        .vermelho {
+            color: #9A3324;
+        }
+        .fundo-etapas {
+            background-color: #E5DAC0;
+        }
+        .linha {
+            border-color: #A9895F;
+        }
+        .peca {
+            background-color: #C7B080;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="px-6">
+        <nav class="max-w-5xl mx-auto flex justify-between items-center py-4 border-b linha">
+            <a href="#inicio" class="text-xl font-semibold">
+                Fio <span class="vermelho">&</span> Prensa
+            </a>
+            <div class="hidden md:flex gap-6 text-sm">
+                <a href="#oficio">O ofício</a>
+                <a href="#servicos">Serviços</a>
+                <a href="#pecas">Peças</a>
+                <a href="#contato">Contato</a>
+            </div>
+            <a href="#contato" class="verde text-white px-4 py-3 text-sm">
+                Agendar visita
+            </a>
+        </nav>
+    </header>
+
+    <section id="inicio" class="px-6 py-16">
+        <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-10">
+            <div>
+                <h1 class="text-4xl font-semibold mb-5">
+                    Livros que se seguram nas mãos por gerações.
+                </h1>
+                <p class="text-sm leading-6 mb-6">
+                    Costuramos, colamos e prensamos à mão - do caderno de uso diário à restauração de exemplares de família. Cada peça passa pelas mesmas quatro etapas que aprendemos há trinta anos.
+                </p>
+                <a href="#" class="border border-green-900 px-4 py-3 text-sm">
+                    Ver serviços
+                </a>
+            </div>
+            <div class="space-y-4">
+                <div class="flex items-center gap-4 border-b linha pb-4">
+                    <div class="w-6 h-6 bg-red-900"></div>
+                    <div>
+                        <h3 class="font-semibold text-sm">Linho belga, cor terracota</h3>
+                        <p class="text-sm text-gray-600">Capa dura, acabamento fosco</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4 border-b linha pb-4">
+                    <div class="w-6 h-6 verde"></div>
+                    <div>
+                        <h3 class="font-semibold text-sm">Percalux verde-musgo</h3>
+                        <p class="text-sm text-gray-600">Resistente à umidade</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4 border-b linha pb-4">
+                    <div class="w-6 h-6 bg-yellow-700"></div>
+                    <div>
+                        <h3 class="font-semibold text-sm">Papel de guarda marmorizado</h3>
+                        <p class="text-sm text-gray-600">Feito à mão, padrões únicos</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="oficio" class="fundo-etapas px-6 py-16">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-2xl font-semibold mb-4">
+                O ofício, em quatro etapas
+            </h2>
+            <p class="text-sm mb-10">
+                Cada livro passa por quatro etapas até ficar pronto.
+            </p>
+            <div class="grid md:grid-cols-4 gap-6">
+                <div class="border-t linha pt-4">
+                    <p class="vermelho text-xl">01</p>
+                    <h3 class="font-semibold mt-2">Dobra</h3>
+                    <p class="text-sm mt-2">
+                        As folhas são dobradas em cadernos e organizadas na ordem de leitura.
+                    </p>
+                </div>
+                <div class="border-t linha pt-4">
+                    <p class="vermelho text-xl">02</p>
+                    <h3 class="font-semibold mt-2">Costura</h3>
+                    <p class="text-sm mt-2">
+                        Os cadernos são costurados manualmente com fio encerado, ponto a ponto.
+                    </p>
+                </div>
+                <div class="border-t linha pt-4">
+                    <p class="vermelho text-xl">03</p>
+                    <h3 class="font-semibold mt-2">Colagem</h3>
+                    <p class="text-sm mt-2">
+                        O lombo recebe cola natural, que dá firmeza sem engessar o papel.
+                    </p>
+                </div>
+                <div class="border-t linha pt-4">
+                    <p class="vermelho text-xl">04</p>
+                    <h3 class="font-semibold mt-2">Prensagem</h3>
+                    <p class="text-sm mt-2">
+                        O volume descansa na prensa por 24h para fixar à forma definitiva.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pecas" class="px-6 py-12">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-2xl font-semibold mb-8">
+                Peças recentes
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <div class="peca col-span-2 row-span-2 h-64 flex items-end p-4">
+                    <p class="text-sm">Caderno de campo</p>
+                </div>
+                <div class="peca h-28 flex items-end p-3">
+                    <p class="text-xs">Restauro 1948</p>
+                </div>
+                <div class="peca h-28 flex items-end p-3">
+                    <p class="text-xs">Álbum de casamento</p>
+                </div>
+                <div class="peca col-span-2 h-28 flex items-end p-3">
+                    <p class="text-xs">Edição limitada, 12 exemplares</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="border-t linha px-6 py-16">
+        <div class="max-w-3xl mx-auto border-l-2 border-red-800 pl-6">
+            <p class="text-xl italic">
+                "Levei o diário do meu avô, que estava se desfazendo,
+                e voltou como se tivesse sido feito ontem,
+                mas ainda com a capa original."
+            </p>
+            <p class="text-sm mt-4">
+                <strong>Helena Mourão</strong> — cliente desde 2019
+            </p>
+        </div>
+    </section>
+
+    <footer id="contato" class="verde text-white px-6 py-12">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-2xl font-semibold mb-8">
+                Visite o ateliê
+            </h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="font-semibold mb-2">Endereço</h3>
+                    <p class="text-sm">
+                        Rua dos Encadernadores, 214
+                        <br>
+                        Lapa, São Paulo
+                    </p>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-2">Horário</h3>
+                    <p class="text-sm">
+                        Terça a sábado
+                        <br>
+                        Das 10h às 18h
+                    </p>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-2">Contato</h3>
+                    <p class="text-sm">
+                        contato@fioeprensa.com.br
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
